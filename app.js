@@ -48,7 +48,7 @@ function showitems() {
   </div>`;
   });
   let div = document.querySelector("div.cont");
-  if (notesObj.lenght != 0) {
+  if (notesObj.length != 0) {
     div.innerHTML = html;
   } else {
     div.innerHTML = `<p>No work is added! Add some work.</p>`;
