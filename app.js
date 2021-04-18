@@ -41,7 +41,7 @@ function showitems() {
   }
   let html = "";
   notesObj.forEach(function (element, index) {
-    html += `<div id="todo">
+    html += `<div id="todo" class="todo">
     <h3>Note ${index + 1}</h3>
     <h6>${element}</h6>
     <button id="${index}" onclick="deletenote(this.id)" class="btn">Delete</button>
@@ -54,6 +54,7 @@ function showitems() {
     div.innerHTML = `<p>No work is added! Add some work.</p>`;
   }
 }
+
 function deletenote(index) {
   console.log("this is deletd");
   let notes = localStorage.getItem("notes");
@@ -66,3 +67,18 @@ function deletenote(index) {
   localStorage.setItem("notes", JSON.stringify(notesObj));
   showitems();
 }
+
+let search = document.getElementById("search");
+search.addEventListener("input", function (e) {
+  let inputxt = search.value;
+  let card = document.getElementsByClassName("todo");
+  Array.from(card).forEach(function (element) {
+    let cardtxt = element.querySelector("h6").innerText;
+    if (cardtxt.includes(inputxt)) {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  });
+  console.log(inputxt);
+});
