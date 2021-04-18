@@ -24,6 +24,7 @@ body {
   justify-content: center; */
 }
 .nav input[type="text"] {
+  width: 130px;
   font-size: 17px;
   border: none;
 }
