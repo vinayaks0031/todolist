@@ -42,7 +42,9 @@ function showitems() {
   let html = "";
   notesObj.forEach(function (element, index) {
     html += `<div id="todo" class="todo">
-    <h3>Note ${index + 1}</h3>
+    <h3>Note ${
+      index + 1
+    }<button id="${index}" onclick="edit(this.id)" class="edit"><i class="fas fa-edit"></i></button></h3>
     <h6>${element}</h6>
     <button id="${index}" onclick="deletenote(this.id)" class="btn">Delete</button>
   </div>`;
@@ -68,6 +70,26 @@ function deletenote(index) {
   showitems();
 }
 
+function edit(index) {
+  let notes = localStorage.getItem("notes");
+  if (notes == null) {
+    notesObj = [];
+  } else {
+    notesObj = JSON.parse(notes);
+  }
+  let txta = `<textarea cols="40" id="edittxt">${notesObj[index]}</textarea>
+  <button id="addedit"><i class="far fa-check-circle"></i></button>`;
+  let newtxt = document.getElementById(index).parentNode.parentNode;
+  newtxt.innerHTML = txta;
+  let addedit = document.getElementById("addedit");
+  addedit.addEventListener("click", function () {
+    let edittxt = document.getElementById("edittxt");
+    notesObj[index] = edittxt.value;
+    localStorage.setItem("notes", JSON.stringify(notesObj));
+    showitems();
+  });
+}
+
 let search = document.getElementById("search");
 search.addEventListener("input", function (e) {
   let inputxt = search.value;
@@ -80,5 +102,5 @@ search.addEventListener("input", function (e) {
       element.style.display = "none";
     }
   });
-  console.log(inputxt);
+  // console.log(inputxt);
 });

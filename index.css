@@ -81,3 +81,8 @@ hr {
   width: 80%;
   margin-left: 10%;
 }
+button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
