@@ -86,3 +86,6 @@ button {
   cursor: pointer;
   background-color: transparent;
 }
+#edittxt {
+  width: 80%;
+}

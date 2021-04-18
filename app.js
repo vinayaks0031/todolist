@@ -77,7 +77,7 @@ function edit(index) {
   } else {
     notesObj = JSON.parse(notes);
   }
-  let txta = `<textarea cols="40" id="edittxt">${notesObj[index]}</textarea>
+  let txta = `<textarea id="edittxt">${notesObj[index]}</textarea>
   <button id="addedit"><i class="far fa-check-circle"></i></button>`;
   let newtxt = document.getElementById(index).parentNode.parentNode;
   newtxt.innerHTML = txta;
