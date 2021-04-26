@@ -91,6 +91,7 @@ function edit(index) {
   addedit.addEventListener("click", function () {
     let edittxt = document.getElementById("edittxt");
     selectedObj.text = edittxt.value;
+    notesObj[index].text = selectedObj.text;
     localStorage.setItem("notes", JSON.stringify(notesObj));
     showitems();
   });
