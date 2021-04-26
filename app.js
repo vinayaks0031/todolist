@@ -2,6 +2,7 @@ showitems();
 let btn = document.getElementById("btn");
 btn.addEventListener("click", function (e) {
   let txt = document.querySelector("textarea#txt");
+  let titletxt = document.getElementById("titletxt");
   if (txt.value.length != 0) {
     // let div = document.createElement("div");
     // div.id = "todo";
@@ -13,9 +14,14 @@ btn.addEventListener("click", function (e) {
     } else {
       notesObj = JSON.parse(notes);
     }
-    notesObj.push(txt.value);
+    let myObj = {
+      text: txt.value,
+      title: titletxt.value,
+    };
+    notesObj.push(myObj);
     localStorage.setItem("notes", JSON.stringify(notesObj));
     txt.value = "";
+    titletxt.value = "";
     // n.innerText = txt.value;
     // txt.value = "";
     // div.appendChild(n);
@@ -42,10 +48,8 @@ function showitems() {
   let html = "";
   notesObj.forEach(function (element, index) {
     html += `<div id="todo" class="todo">
-    <h3>Note ${
-      index + 1
-    }<button id="${index}" onclick="edit(this.id)" class="edit"><i class="fas fa-edit"></i></button></h3>
-    <h6>${element}</h6>
+    <h3>${element.title}<button id="${index}" onclick="edit(this.id)" class="edit"><i class="fas fa-edit"></i></button></h3>
+    <h6>${element.text}</h6>
     <button id="${index}" onclick="deletenote(this.id)" class="btn">Delete</button>
   </div>`;
   });
@@ -77,14 +81,16 @@ function edit(index) {
   } else {
     notesObj = JSON.parse(notes);
   }
-  let txta = `<textarea id="edittxt">${notesObj[index]}</textarea>
+  let selectedObj = notesObj[index];
+  let txta = `<textarea id="edittxt">${selectedObj.text}</textarea>
   <button id="addedit"><i class="far fa-check-circle"></i></button>`;
   let newtxt = document.getElementById(index).parentNode.parentNode;
+  console.log(selectedObj.text);
   newtxt.innerHTML = txta;
   let addedit = document.getElementById("addedit");
   addedit.addEventListener("click", function () {
     let edittxt = document.getElementById("edittxt");
-    notesObj[index] = edittxt.value;
+    selectedObj.text = edittxt.value;
     localStorage.setItem("notes", JSON.stringify(notesObj));
     showitems();
   });
